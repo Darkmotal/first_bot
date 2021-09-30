@@ -1,7 +1,7 @@
 process.env.NTBA_FIX_319 = 1;
 const TelegramApi = require('node-telegram-bot-api')
 
-const token = T_TOKEN
+const token = process.env.T_TOKEN
 
 const bot = new TelegramApi(token, {polling:true})
 
