@@ -1,7 +1,7 @@
 process.env.NTBA_FIX_319 = 1;
 const TelegramApi = require('node-telegram-bot-api')
 
-const token = '2006238116:AAF6ApKzaGQJsl9Cmd_SiAhFV-d53V_gwSc'
+const token = T_TOKEN
 
 const bot = new TelegramApi(token, {polling:true})
 
@@ -13,14 +13,14 @@ const gameOptions = {
     })
 }
 
-const start = () => {
-    bot.setMyCommands([
+const start = async () => {
+    await bot.setMyCommands([
         {command: '/start', description: 'Начало'},
         {command: '/info', description: 'Информация'},
 
     ])
 
-    bot.on('message', async msg => {
+    await bot.on('message', async msg => {
         const text = msg.text
         const chatId = msg.chat.id
 
