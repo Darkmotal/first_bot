@@ -24,12 +24,12 @@ const start = () => {
         const chatId = msg.chat.id
 
         if (text === '/start') {
-            return bot.sendMessage(chatId, 'Hello man, whassup')
+            return bot.sendMessage(chatId, 'Здарова лох!')
         }
         if (text === '/info') {
-            return bot.sendMessage(chatId, 'i unno', gameOptions)
+            return bot.sendMessage(chatId, 'ебет?', gameOptions)
         }
-        return bot.sendMessage(chatId,'Wha?')
+        return bot.sendMessage(chatId,'че?')
     })
 }
 

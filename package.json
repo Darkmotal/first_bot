@@ -5,12 +5,16 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "node index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "node-telegram-bot-api": "^0.54.0",
     "nodemon": "^2.0.13"
+  },
+  "devDependencies": {
+    "ngrok": "^4.2.2"
   }
 }
