@@ -1,10 +1,23 @@
 const Promise = require('bluebird');
 const TelegramBot = require('node-telegram-bot-api');
+const express = require('express')
+const bodyParser = require('body-parser');
 require('dotenv').config()
+
+const app = express();
+
+app.use(bodyParser.json());
+
+app.listen(process.env.PORT);
+
+app.post('/' + bot.token, (req, res) => {
+    bot.processUpdate(req.body);
+    res.sendStatus(200);
+});
 
 // replace the value below with the Telegram token you receive from @BotFather
 const token = process.env.T_TOKEN;
-
+let bot;
 // Create a bot that uses 'polling' to fetch new updates
 if (process.env.NODE_ENV === 'production') {
     bot = new TelegramBot(token);
