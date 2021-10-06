@@ -1,37 +1,31 @@
-process.env.NTBA_FIX_319 = 1;
-const TelegramApi = require('node-telegram-bot-api')
+const TelegramBot = require('node-telegram-bot-api');
+require('dotenv').config()
 
-const token = process.env.T_TOKEN
+// replace the value below with the Telegram token you receive from @BotFather
+const token = process.env.T_TOKEN;
+console.log(token)
 
-const bot = new TelegramApi(token, {polling:true})
+// Create a bot that uses 'polling' to fetch new updates
+const bot = new TelegramBot(token, {polling: true});
 
-const gameOptions = {
-    reply_markup: JSON.stringify({
-        inline_keyboard: [
-            [{text: 'Текст', callback_data: 'bara'}]
-        ]
-    })
-}
+// Matches "/echo [whatever]"
+bot.onText(/\/echo (.+)/, (msg, match) => {
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
 
-const start = async () => {
-    await bot.setMyCommands([
-        {command: '/start', description: 'Начало'},
-        {command: '/info', description: 'Информация'},
+    const chatId = msg.chat.id;
+    const resp = match[1]; // the captured "whatever"
 
-    ])
+    // send back the matched "whatever" to the chat
+    bot.sendMessage(chatId, resp);
+});
 
-    await bot.on('message', async msg => {
-        const text = msg.text
-        const chatId = msg.chat.id
+// Listen for any kind of message. There are different kinds of
+// messages.
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
 
-        if (text === '/start') {
-            return bot.sendMessage(chatId, 'Здарова лох!')
-        }
-        if (text === '/info') {
-            return bot.sendMessage(chatId, 'ебет?', gameOptions)
-        }
-        return bot.sendMessage(chatId,'че?')
-    })
-}
-
-start()
+    // send a message to the chat acknowledging receipt of their message
+    bot.sendMessage(chatId, 'Received your message');
+});
