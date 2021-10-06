@@ -11,6 +11,7 @@ const token = process.env.T_TOKEN;
 let bot;
 // Create a bot that uses 'polling' to fetch new updates
 if (process.env.NODE_ENV === 'production') {
+    console.log('production')
     bot = new TelegramBot(token);
     bot.setWebHook(process.env.HEROKU_URL + bot.token);
 } else {
